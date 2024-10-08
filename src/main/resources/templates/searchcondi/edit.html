@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="fragments/head :: head">
+</div>
+<body class="hold-transition sidebar-mini">
+ <div class="wrapper">
+
+  <!-- Include the header 
+  <div th:include="fragments/header :: header"></div>
+-->
+  <!-- Content Wrapper. Contains page content -->
+  <div class="">
+   <!-- Content Header (Page header) -->
+   <div class="content-header">
+    <div class="container-fluid">
+     <div class="row mb-2">
+      <div class="col-sm-6">
+       <h1 class="m-0">Note List</h1>
+      </div>
+      <!-- /.col -->
+      <div class="col-sm-6">
+       <ol class="breadcrumb float-sm-right">
+        <li class="breadcrumb-item"><a href="#">note</a></li>
+        <li class="breadcrumb-item active">Note List</li>
+       </ol>
+      </div>
+      <!-- /.col -->
+     </div>
+     <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+   </div>
+   <!-- /.content-header -->
+
+   <!-- Main content -->
+   <div class="content">
+    <div class="container-fluid">
+     <div class="row">
+
+
+      <div class="card w-100">
+       <div class="card-header">
+        <h5 class="m-0">Featured</h5>
+       </div>
+       <div class="card-body">
+        <form th:action="@{/searchcondi/update}" th:object="${searchCondi}" method="post" class="mt-4">
+            
+        <input type="text" name="id" th:value="*{id}" readonly/>
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" id="title" name="title" th:field="*{title}" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="condi" class="form-label">Condition</label>
+                <textarea id="condi" name="condi" th:field="*{condi}" class="form-control" rows="3" required></textarea>
+            </div>
+            <input type="hidden" th:field="*{id}">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a href="/searchcondi/list" class="btn btn-secondary">Cancel</a>
+        </form>
+       </div>
+      </div>
+
+     </div>
+     <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+   </div>
+   <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Include the footer -->
+  <div th:include="fragments/footer :: footer"></div>
+
+ </div>
+
+</body>
+
+<script>
+    $(document).ready(function() {
+        $('#recordTable').DataTable(); // Initialize DataTable
+        $('.detailBtn').on('click', function() {
+            window.location.href = '/searchcondi/update?id=' + $("#id").val();
+        });
+    });
+</script>
+</html>

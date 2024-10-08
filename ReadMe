@@ -1,0 +1,8 @@
+■MyBatis source 生成
+https://qiita.com/suke_masa/items/51b8b8d04ef12277dd06
+
+cd C:\work\project\git\inote
+mvn mybatis-generator:generate
+
+cd C:\work\tools\sqlite-tools-win-x64-3460100
+sqlite3.exe iNote.db

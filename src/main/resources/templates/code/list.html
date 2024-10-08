@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="fragments/head :: head">
+
+<body class="hold-transition sidebar-mini">
+ <div class="wrapper">
+
+  <!-- Include the header 
+  <div th:include="fragments/header :: header"></div>
+-->
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="">
+   <!-- Content Header (Page header) -->
+   <div class="content-header">
+    <div class="container-fluid">
+     <div class="row mb-2">
+      <div class="col-sm-6">
+       <h1 class="m-0">Code メンテナンス</h1>
+      </div>
+      <!-- /.col -->
+      <div class="col-sm-6">
+       <ol class="breadcrumb float-sm-right">
+        <li class="breadcrumb-item"><a href="#">note</a></li>
+        <li class="breadcrumb-item active">Code List</li>
+       </ol>
+      </div>
+      <!-- /.col -->
+     </div>
+     <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+   </div>
+   <!-- /.content-header -->
+
+   <!-- Main content -->
+   <div class="content">
+    <div class="container-fluid">
+     <div class="row">
+      <div class="card w-100">
+       <div class="card-header">
+        <h5 class="m-0">Code 一覧</h5>
+       </div>
+       <div class="card-body" th:object="${mcode}">
+        <th:block th:each="mcode : ${mcodeList}">
+         <div class="row" th:object="${mcode}">
+          <div class="col-4">
+           <div class="form-group">
+            <label for="exampleInputEmail1">Code</label> <input
+             type="text" class="form-control" th:id="|id_*{code}_code|"
+             th:value="|*{code}|" placeholder="Code" readonly>
+           </div>
+          </div>
+          <div class="col-4">
+           <div class="form-group">
+            <label for="exampleInputEmail1">Name</label> <input
+             type="text" class="form-control" th:id="|id_*{code}_name|"
+             th:value="|*{name}|" placeholder="Name">
+           </div>
+          </div>
+          <div class="col-4 align-bottom">
+           <a href="#" class="btn btn-primary" th:onclick="|saveCode('__${mcode.code}__')|">Save</a>
+          </div>
+         </div>
+
+        </th:block>
+       </div>
+      </div>
+
+     </div>
+     <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+   </div>
+   <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Include the footer -->
+  <div th:include="fragments/footer :: footer"></div>
+
+ </div>
+
+</body>
+<script>
+function saveCode(code){
+    alert(code);
+}
+</script>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="fragments/head :: head">
+</div>
+<body class="hold-transition sidebar-mini">
+ <div class="wrapper">
+
+  <!-- Include the header 
+  <div th:include="fragments/header :: header"></div>
+-->
+  <!-- Content Wrapper. Contains page content -->
+  <div class="">
+   <!-- Content Header (Page header) -->
+   <div class="content-header">
+    <div class="container-fluid">
+     <div class="row mb-2">
+      <div class="col-sm-6">
+       <h1 class="m-0">Note List</h1>
+      </div>
+      <!-- /.col -->
+      <div class="col-sm-6">
+       <ol class="breadcrumb float-sm-right">
+        <li class="breadcrumb-item"><a href="#">note</a></li>
+        <li class="breadcrumb-item active">Note List</li>
+       </ol>
+      </div>
+      <!-- /.col -->
+     </div>
+     <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+   </div>
+   <!-- /.content-header -->
+
+   <!-- Main content -->
+   <div class="content">
+    <div class="container-fluid">
+     <div class="row">
+
+
+      <div class="card w-100">
+       <div class="card-header">
+        <h5 class="m-0">Featured</h5>
+       </div>
+       <div class="card-body">
+
+        <!-- 編集フォーム -->
+        <form action="/note/edit" method="post">
+        <input type="hidden" name="noteId" th:value="${note.noteId}"/>
+         <!-- 保存ボタン -->
+         <div class="form-group">
+          <button type="submit" class="btn btn-primary">Save</button>
+          <a href="/note/list" class="btn btn-secondary">Cancel</a>
+         </div>
+
+         <!-- noteのタイトル -->
+         <div class="form-group">
+          <label for="title">Title:</label> <input type="text"
+           id="title" name="title" class="form-control" th:value="${note.title}">
+         </div>
+
+         <!-- noteの内容 -->
+         <div class="form-group">
+          <label for="contents">Contents:</label>
+          <textarea id="contents" name="contents" class="form-control" rows="10"
+           th:text="${note.contents}"></textarea>
+         </div>
+
+         <!-- tagsの表示 -->
+         <div class="form-group">
+          <label for="tags">Tags:</label> <select id="tags" name="tags"
+           class="form-select w-100" size=20 multiple>
+           <option th:each="code : ${codeList}" th:value="${code.code}"
+            th:text="${code.name}"
+            th:selected="${#strings.contains(note.tags, code.name)}">
+           </option>
+          </select>
+         </div>
+
+
+         <!-- note_banchの表示 -->
+         <div class="form-group">
+          <label for="noteBanch">Branch:</label> <input type="text"
+           id="noteBanch" class="form-control"
+           th:value="${note.noteBanch}" readonly>
+         </div>
+
+         <!-- created_atの表示 -->
+         <div class="form-group">
+          <label for="createdAt">Created At:</label> <input type="text"
+           id="createdAt" class="form-control"
+           th:value="${note.createdAt}" readonly>
+         </div>
+        </form>
+       </div>
+      </div>
+
+     </div>
+     <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+   </div>
+   <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Include the footer -->
+  <div th:include="fragments/footer :: footer"></div>
+
+ </div>
+
+</body>
+
+<script>
+    $(document).ready(function() {
+        $('#recordTable').DataTable(); // Initialize DataTable
+        $('.detailBtn').on('click', function() {
+            // noteId属性の値を取得
+            var noteId = $(this).attr('noteId');
+            // 取得したnoteIdを用いてeditページに遷移する
+            window.location.href = '/note/edit?noteId=' + noteId;
+            // 必要に応じて、ここに他の処理を追加
+        });
+    });
+</script>
+</html>

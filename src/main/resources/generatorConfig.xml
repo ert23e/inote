@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <context id="context1" targetRuntime="MyBatis3Simple">
+        <!--  equals()メソッドおよびhashCode()メソッドを作成する -->
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
+        <!--  toString()メソッドを作成する -->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+        <!-- エンティティクラスにwithXxx()メソッドを作成する -->
+        <plugin type="org.mybatis.generator.plugins.FluentBuilderMethodsPlugin"/>
+        <!-- エンティティクラスにSerializableを実装する -->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <!-- Mapperインタフェースに@Mapperアノテーションを付加する -->
+        <plugin type="org.mybatis.generator.plugins.MapperAnnotationPlugin"/>
+
+        <!-- コメント生成の抑制 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!-- JDBC接続情報 -->
+        <jdbcConnection driverClass="org.sqlite.JDBC"
+                        connectionURL="jdbc:sqlite:C:\\work\\tools\\sqlite-tools-win-x64-3460100\\iNote.db"
+                        userId=""
+                        password="">
+        </jdbcConnection>
+
+        <!-- エンティティ作成に関する設定 -->
+        <javaModelGenerator targetPackage="com.whencout.inote.entity" targetProject="src/main/java">
+            <property name="enableSubPackages" value="false"/>  <!-- trueにするとスキーマ名のサブパッケージができる。スキーマ名が"public"だとJavaの予約語なのでコンパイルエラーになる。 -->
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!--
+        Mapperインタフェース作成に関する設定
+        type="ANNOTATEDMAPPER"でアノテーションを使ったMapperが作成される
+        type="XMLMAPPER"でXMLを使ったMapperが作成される（<sqlMapGenerator>要素が別途必要）
+        -->
+        <javaClientGenerator type="ANNOTATEDMAPPER" targetPackage="com.whencout.inote.mapper" targetProject="src/main/java">
+            <property name="enableSubPackages" value="false"/>  <!-- trueにするとスキーマ名のサブパッケージができる。スキーマ名が"public"だとJavaの予約語なのでコンパイルエラーになる。 -->
+        </javaClientGenerator>
+
+        <!--
+        "%"にすると全テーブルが出力される
+        https://mybatis.org/generator/configreference/table.html#required-attributes
+        mvn mybatis-generator:generate
+        <table schema="public" tableName="%">
+        -->
+        <table schema="public" tableName="m_search_condi">
+        </table>
+    </context>
+</generatorConfiguration>
